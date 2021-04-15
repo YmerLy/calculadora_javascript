@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculdora</title>
+	<style>
+		#container-calculadora{
+			display: grid;
+			grid: repeat(2, 60px) / auto-flow 80px;
+			width: 920px;
+			height: 650px;
+			background: #e1e1e1;
+			margin-left: 500px;
+			margin-top: 25px;
+			align-content: center;
+			align-items: center;
+		}
+		#calculadora-exibicao{
+			display: inline-block;
+			background: #000;
+			width: 332px;
+			height: 550px;
+			margin-top: 45px;
+			margin-left: 230px;
+			align-items: center;
+		}
+		#exibir-resultado{
+			display: block;;
+			background: #fff;
+			width: 100%;
+			height: 150px;
+		}
+		#exibir-resultado input{
+			display: inline;
+			width: 325px;
+			height: 144px;
+			text-align: right;
+			font-size: 80px;
+		}
+		@media screen and (max-width: 480px){
+			#container-calculadora{max-width: 400px;}
+			#container-exibicao{max-width: 300px;}
+		}
+		button{
+			width: 80px;
+			height: 80px;
+		}
+		div button #igual{
+			float: right;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="container-calculadora">
+		<div id="calculadora-exibicao">
+			<div id="exibir-resultado">
+				<input id="resultado" type="text" placeholder="0" disabled="disabled">			
+			</div>		
+			<div id="parte-superior-superior">
+				<button type="button" onclick="calcular('tipo', 'c')">C</button>
+				<button type="button" onclick="calcular('tipo', '/')">/</button>
+				<button type="button" onclick="calcular('tipo', '*')">x</button>
+				<button type="button" onclick="calcular('tipo', '-')">-</button>
+			</div>
+			<div id="parte-superior">	
+				<button type="button" onclick="calcular('numero', 7)">7</button>
+				<button type="button" onclick="calcular('numero', 8)">8</button>
+				<button type="button" onclick="calcular('numero', 9)">9</button>
+				<button type="button" onclick="calcular('tipo', '+')">+</button>
+			</div>
+			<div id="parte-meio">
+				<button type="button" onclick="calcular('numero', 4)">4</button>
+				<button type="button" onclick="calcular('numero', 5)">5</button>
+				<button type="button" onclick="calcular('numero', 6)">6</button>
+				<button type="button" onclick="calcular('tipo', '.')">,</button>
+			</div>
+				<div id="parte-inferior">
+				<button type="button" onclick="calcular('numero', 1)">1</button>
+				<button type="button" onclick="calcular('numero', 2)">2</button>
+				<button type="button" onclick="calcular('numero', 3)">3</button>
+			</div>
+			<div id="parte-inferior-inferior">
+				<button type="button" onclick="calcular('numero', 0)">0</button>			
+				<button id="igual" type="button" onclick="calcular('tipo', 'enter')">=</button>
+			</div>
+		</div>		
+	</div>
+
+	<script>		
+		function calcular(operacao, valor){
+			//se parametro for == tipo
+			if (operacao == 'tipo') {
+
+				//se parametro for == tipo, verificar se é == c
+				if(valor == 'c'){
+					//limpar do resultado
+					document.getElementById('resultado').value = '';
+				}
+				//se parametro for == tipo, verificar se é == operacoes aritméticas
+				if(valor == "+" || valor == '-' || valor == '/' || valor == '*'){
+					document.getElementById('resultado').value += valor;
+				}
+				//se parametro for == tipo, verificar se é igual operação resultado
+				if(valor == 'enter'){
+					// variavel recebe resultado *eval = + sem cocatenação
+					var valor_campo = eval(document.getElementById('resultado').value);
+					
+					document.getElementById('resultado').value = valor_campo;
+				}
+				//se operacao == numero fazer 
+			}else if(operacao == 'numero'){
+				  	document.getElementById('resultado').value += valor;
+			}
+		} 
+
+	</script>
+</body>
+</html>
